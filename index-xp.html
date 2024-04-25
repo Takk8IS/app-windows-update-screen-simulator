@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Windows Update</title>
+        <script>
+            document.addEventListener("mousemove", function (e) {
+                e.preventDefault();
+            });
+            window.addEventListener("keydown", function (e) {
+                e.preventDefault();
+            });
+            window.addEventListener("keyup", function (e) {
+                e.preventDefault();
+            });
+            window.addEventListener("keydown", function (e) {
+                if (e.key === "Tab" && e.altKey) {
+                    e.preventDefault();
+                }
+            });
+        </script>
+        <script type="text/javascript">
+            function clickIE() {
+                if (document.all) return !1;
+            }
+            function clickNS(n) {
+                if (
+                    (document.layers ||
+                        (document.getElementById && !document.all)) &&
+                    (2 == n.which || 3 == n.which)
+                )
+                    return !1;
+            }
+            document.layers
+                ? (document.captureEvents(Event.mousedown),
+                  (document.onmousedown = clickNS))
+                : ((document.onmouseup = clickNS),
+                  (document.oncontextmenu = clickIE)),
+                (document.oncontextmenu = new Function("return false"));
+        </script>
+        <script>
+            var count = 0,
+                stage = 1,
+                stage2 = 3,
+                counter = setInterval(timer, 10000),
+                ref = "Configuring updates";
+            function timer() {
+                count = count + 1;
+                if (count <= 0) {
+                    clearInterval(counter);
+                    return;
+                }
+                document.getElementById("timer").innerHTML = count + "%";
+                if (count > 99) {
+                    stage = stage + 1;
+                    document.getElementById("stage").innerHTML = stage + "";
+                    count = 0;
+                    return;
+                }
+                if (stage > 3) {
+                    stage2 = 68;
+                    ref = "Installing Updates";
+                    document.getElementById("ref").innerHTML = ref + "";
+                    document.getElementById("stage2").innerHTML = stage2 + "";
+                    return;
+                }
+            }
+        </script>
+        <script>
+            function openFullscreen() {
+                var elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            }
+            function disableContextMenu(event) {
+                event.preventDefault();
+            }
+            function disableKeyboardInput(event) {
+                event.preventDefault();
+            }
+            window.addEventListener("load", function () {
+                openFullscreen();
+                document.addEventListener(
+                    "contextmenu",
+                    disableContextMenu,
+                    false,
+                );
+                document.addEventListener(
+                    "keydown",
+                    disableKeyboardInput,
+                    false,
+                );
+            });
+        </script>
+        <style>
+            body {
+                background-color: #3d8dd5;
+                user-select: none;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                vertical-align: middle;
+                text-align: center;
+                z-index: -1;
+                margin: 0;
+                padding: 0;
+                cursor: none;
+                overflow: hidden;
+            }
+            .background-system {
+                background-image: url(src/assets/background-xp.jpg);
+                background-color: #3d8dd5;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .win-update-text {
+                vertical-align: middle;
+                position: absolute;
+                top: 60%;
+                height: 70px;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                width: 520px;
+                margin-top: -5%;
+                font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
+                font-size: 19px;
+                color: #fff;
+                font-weight: normal;
+                text-align: right;
+                user-select: none;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+            }
+            .win-logo-block {
+                position: absolute;
+                bottom: 50px;
+                left: 50%;
+                width: 50%;
+            }
+            .center-again {
+                width: 520px;
+                margin: 0 auto;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body class="background-system">
+        <div
+            style="
+                display: block;
+                position: absolute;
+                min-width: 100%;
+                min-height: 100%;
+                margin: 0;
+                padding: 0;
+            "
+        >
+            <div class="center-again">
+                <div class="win-update-text">
+                    <div class="win-logo-block">
+                        <img
+                            style="height: 140px"
+                            src="src/assets/logo-xp.png"
+                            draggable="false"
+                            ondragstart="return false;"
+                        />
+                    </div>
+                    <div class="win-update-text">
+                        <a
+                            ><br /><span
+                                >Instalando atualizações do Windows...
+                            </span></a
+                        ><a id="timer">0%</a><br /><span
+                            >Não desligue ou desconecte o seu computador.</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

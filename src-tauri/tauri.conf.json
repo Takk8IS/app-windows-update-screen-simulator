@@ -1,0 +1,61 @@
+{
+    "build": {
+        "beforeDevCommand": "yarn dev",
+        "beforeBuildCommand": "yarn build",
+        "devPath": "http://localhost:1420",
+        "distDir": "../dist"
+    },
+    "package": {
+        "productName": "Windows Update Screen",
+        "version": "0.0.1"
+    },
+    "tauri": {
+        "allowlist": {
+            "all": false,
+            "shell": {
+                "all": false,
+                "open": true
+            }
+        },
+        "windows": [
+            {
+                "alwaysOnTop": true,
+                "fullscreen": true,
+                "height": 600,
+                "resizable": false,
+                "title": "Windows Update Screen",
+                "width": 800,
+                "decorations": false,
+                "center": true,
+                "maximizable": false,
+                "minimizable": false,
+                "closable": false,
+                "transparent": false,
+                "maximized": false,
+                "contentProtected": true,
+                "hiddenTitle": true
+            }
+        ],
+        "security": {
+            "csp": null
+        },
+        "updater": {
+            "active": false
+        },
+        "bundle": {
+            "active": true,
+            "targets": "all",
+            "identifier": "windows.update.screen",
+            "shortDescription": "",
+            "longDescription": "",
+            "copyright": "",
+            "category": "Puzzle Game",
+            "icon": [
+                "../src/assets/icon.png",
+                "../src/assets/icon.svg",
+                "../src/assets/icon.icns",
+                "../src/assets/icon.ico"
+            ]
+        }
+    }
+}
