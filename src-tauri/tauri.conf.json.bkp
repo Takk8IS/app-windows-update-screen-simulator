@@ -1,0 +1,75 @@
+{
+    "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+    "build": {
+        "beforeBuildCommand": "npm run build",
+        "beforeDevCommand": "npm run dev",
+        "devPath": "http://localhost:3000",
+        "distDir": "../dist"
+    },
+    "package": {
+        "productName": "Windows XP Update Screen",
+        "version": "1.0.2"
+    },
+    "tauri": {
+        "allowlist": {
+            "all": false
+        },
+        "bundle": {
+            "active": true,
+            "category": "Puzzle Game",
+            "copyright": "",
+            "deb": {
+                "depends": []
+            },
+            "externalBin": [],
+            "icon": [
+                "icons/icon.icns",
+                "icons/icon.ico",
+                "icons/icon.png",
+                "icons/icon.svg"
+            ],
+            "identifier": "windows.xp.update.screen",
+            "longDescription": "",
+            "macOS": {
+                "entitlements": null,
+                "exceptionDomain": "",
+                "frameworks": [],
+                "providerShortName": null,
+                "signingIdentity": null
+            },
+            "resources": [],
+            "shortDescription": "",
+            "targets": "all",
+            "windows": {
+                "certificateThumbprint": "A1B1A2B2A3B3A4B4A5B5A6B6A7B7A8B8A9B9A0B0",
+                "digestAlgorithm": "sha256",
+                "timestampUrl": "http://timestamp.comodoca.com"
+            }
+        },
+        "security": {
+            "csp": null
+        },
+        "updater": {
+            "active": false
+        },
+        "windows": [
+            {
+                "alwaysOnTop": true,
+                "fullscreen": true,
+                "height": 600,
+                "resizable": false,
+                "title": "Windows XP Update Screen",
+                "width": 800,
+                "decorations": false,
+                "center": true,
+                "maximizable": false,
+                "minimizable": false,
+                "closable": false,
+                "transparent": false,
+                "maximized": false,
+                "contentProtected": true,
+                "hiddenTitle": true
+            }
+        ]
+    }
+}
