@@ -1,0 +1,49 @@
+# dist.yml
+# macOS (Intel and Apple Silicon)
+name: "publish"
+
+on:
+    push:
+        tags:
+            # Trigger the workflow when a new version tag is created
+            - "*"
+
+jobs:
+    publish-tauri:
+        permissions:
+            contents: write
+        strategy:
+            fail-fast: false
+            matrix:
+                settings:
+                    # For ARM-based Macs (M1 and higher)
+                    - platform: "macos-latest"
+                      args: "--target aarch64-apple-darwin"
+                    # For Intel-based Macs
+                    - platform: "macos-latest"
+                      args: "--target x86_64-apple-darwin"
+        runs-on: ${{ matrix.settings.platform }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: setup node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: lts/*
+            - name: install Rust stable
+              uses: dtolnay/rust-toolchain@stable
+              with:
+                  targets: ${{ matrix.settings.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+            - name: install frontend dependencies
+              run: yarn install
+            - uses: tauri-apps/tauri-action@v0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  # Use the created version tag as the version name
+                  tagName: ${{ github.ref_name }}
+                  # The release name will be the same as the tag
+                  releaseName: "${{ github.ref_name }}"
+                  releaseBody: "macOS (Intel and Apple Silicon)"
+                  releaseDraft: false
+                  prerelease: false
+                  args: ${{ matrix.settings.args }}
